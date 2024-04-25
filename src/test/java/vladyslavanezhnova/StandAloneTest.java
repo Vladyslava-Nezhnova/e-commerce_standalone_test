@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import vladyslavanezhnova.pageobjects.LandingPage;
 
 import java.time.Duration;
 import java.util.List;
@@ -24,6 +25,8 @@ public class StandAloneTest {
         driver.manage().window().maximize();
 
         driver.get("https://rahulshettyacademy.com/client");
+        LandingPage landingPage = new LandingPage(driver);
+
         driver.findElement(By.id("userEmail")).sendKeys("vldnezhnova@gmail.com");
         driver.findElement(By.id("userPassword")).sendKeys("Testing2024");
         driver.findElement(By.cssSelector("[name='login']")).click();
