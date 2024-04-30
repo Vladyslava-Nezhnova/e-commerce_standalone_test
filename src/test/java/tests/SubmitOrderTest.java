@@ -1,31 +1,22 @@
-package vladyslavanezhnova;
+package tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import TestComponents.BaseTest;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 import vladyslavanezhnova.pageobjects.*;
 
-import java.time.Duration;
+import java.io.IOException;
 import java.util.List;
 
-public class SubmitOrderTest {
+public class SubmitOrderTest extends BaseTest {
 
-    public static void main(String[] args) throws InterruptedException {
+
+    @Test
+    public void submitOrder() throws IOException, InterruptedException {
 
         String productName = "ZARA COAT 3";
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.manage().window().maximize();
 
-        LandingPage landingPage = new LandingPage(driver);
-        landingPage.goTo();
         ProductCatalogue productCatalogue = landingPage.loginApplication("vldnezhnova@gmail.com", "Testing2024");
 
         List<WebElement> products = productCatalogue.getProductList();
@@ -40,8 +31,7 @@ public class SubmitOrderTest {
 
         String confirmMessage = confirmationPage.getConfirmationMessage();
         Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
-        driver.close();
 
-        }
+    }
     }
 
