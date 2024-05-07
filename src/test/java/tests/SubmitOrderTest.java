@@ -8,8 +8,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import vladyslavanezhnova.pageobjects.*;
 
+import java.io.IOException;
 import java.util.HashMap;
-
+import java.util.List;
 
 
 public class SubmitOrderTest extends BaseTest {
@@ -40,8 +41,13 @@ public class SubmitOrderTest extends BaseTest {
         Assert.assertTrue(orderPage.VerifyOrderDisplay(productName));
     }
     @DataProvider
-    public Object[][] getData(){
-        HashMap<String, String> map = new HashMap<String, String>();
+    public Object[][] getData() throws IOException {
+
+        List<HashMap<String, String >> data = getJsonDataToMap(System.getProperty("user.dir")+
+                "//src//test//java//vladyslavanezhnova//data//PurchaseOrder.json");
+        return new Object[][] {{data.get(0)}, {data.get(1)}};
+
+        /* HashMap<String, String> map = new HashMap<String, String>();
         map.put("email", "vldnezhnova@gmail.com");
         map.put("password", "Testing2024");
         map.put("product", "ZARA COAT 3");
@@ -49,8 +55,7 @@ public class SubmitOrderTest extends BaseTest {
         HashMap<String, String> map1 = new HashMap<String, String>();
         map1.put("email", "anshika@gmail.com");
         map1.put("password", "Iamking@000");
-        map1.put("product", "ADIDAS ORIGINAL");
-        return new Object[][] {{map }, {map1}};
+        map1.put("product", "ADIDAS ORIGINAL"); */
     }
 
     }
