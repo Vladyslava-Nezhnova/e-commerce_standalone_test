@@ -1,25 +1,20 @@
 package tests;
 
 import TestComponents.BaseTest;
-import org.openqa.selenium.WebElement;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import vladyslavanezhnova.pageobjects.*;
 
-import java.io.IOException;
-import java.util.List;
 
 public class SubmitOrderTest extends BaseTest {
-
-
+    String productName = "ZARA COAT 3";
     @Test
-    public void submitOrder() throws IOException, InterruptedException {
-
-        String productName = "ZARA COAT 3";
+    public void submitOrder() throws InterruptedException {
 
         ProductCatalogue productCatalogue = landingPage.loginApplication("vldnezhnova@gmail.com", "Testing2024");
 
-        List<WebElement> products = productCatalogue.getProductList();
+
         productCatalogue.addProductToCard(productName);
         CartPage cartPage = productCatalogue.goToCartPage();
 
@@ -31,7 +26,14 @@ public class SubmitOrderTest extends BaseTest {
 
         String confirmMessage = confirmationPage.getConfirmationMessage();
         Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
-
     }
+    @Test (dependsOnMethods = {"submitOrder"})
+            public void orderHistoryTest()
+    {
+        ProductCatalogue productCatalogue = landingPage.loginApplication("vldnezhnova@gmail.com", "Testing2024");
+        OrderPage orderPage = productCatalogue.goToOrdersPage();
+        Assert.assertTrue(orderPage.VerifyOrderDisplay(productName));
+    }
+
     }
 
