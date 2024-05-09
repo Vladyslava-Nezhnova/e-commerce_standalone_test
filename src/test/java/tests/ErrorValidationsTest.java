@@ -14,19 +14,17 @@ public class ErrorValidationsTest extends BaseTest {
 
 
     @Test(groups = {"ErrorHandling"})
-    public void LoginErrorValidation() throws IOException, InterruptedException {
+    public void LoginErrorValidation(){
 
-        String productName = "ZARA COAT 3";
         landingPage.loginApplication("vldnezhnova@gmail.com", "apple");
-        Assert.assertEquals("Incorrect email or password.",landingPage.getErrorMessage());
+        Assert.assertEquals("Incorrect email  password.",landingPage.getErrorMessage());
 
     }
     @Test
-    public void ProductErrorValidation() throws IOException,InterruptedException{
+    public void ProductErrorValidation() throws InterruptedException{
 
     String productName = "ZARA COAT 3";
     ProductCatalogue productCatalogue = landingPage.loginApplication("vldnezhnova@gmail.com", "Testing2024");
-    List<WebElement> products = productCatalogue.getProductList();
         productCatalogue.addProductToCard(productName);
     CartPage cartPage = productCatalogue.goToCartPage();
     Boolean match = cartPage.VerifyProductDisplay("ZARA COAT 333");
