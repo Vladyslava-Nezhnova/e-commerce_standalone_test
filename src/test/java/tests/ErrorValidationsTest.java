@@ -1,6 +1,7 @@
 package tests;
 
 import TestComponents.BaseTest;
+import TestComponents.Retry;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,7 +14,7 @@ import java.util.List;
 public class ErrorValidationsTest extends BaseTest {
 
 
-    @Test(groups = {"ErrorHandling"})
+    @Test(groups = {"ErrorHandling"}, retryAnalyzer = Retry.class)
     public void LoginErrorValidation(){
 
         landingPage.loginApplication("vldnezhnova@gmail.com", "apple");
